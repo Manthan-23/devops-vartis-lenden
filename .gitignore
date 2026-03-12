@@ -1,0 +1,12 @@
+# Ignore local terraform directories in any subfolder
+**/.terraform/
+
+# Ignore terraform state files (highly recommended for security)
+*.tfstate
+*.tfstate.*
+
+# Ignore crash logs
+crash.log
+
+# Also ignore your Node.js modules since they're in your 'app' folder
+app/node_modules/
