@@ -1,6 +1,10 @@
 # DevSecOps Assignment – GET 2026  
 **Vartis Platform (LenDenClub) – DevOps Engineer Assignment**
 
+## Video Link
+**Video Recording (5–10 minutes):**  
+[Watch the demo video](https://drive.google.com/file/d/17fSz2PakT6STb6waMBTdhYxLxiiZrvSh/view?usp=sharing) 
+
 ## Project Overview
 This project demonstrates a complete **DevSecOps workflow** for securely provisioning and validating cloud infrastructure before deployment.
 
@@ -122,7 +126,7 @@ GitHub Repository
   - `Dockerfile`
   - `docker-compose.yml`
 
-> **Note:** Docker Hub connectivity was blocked on the local network during testing, so the final cloud deployment was demonstrated using a secure EC2 bootstrap approach via `user_data`. Docker artifacts are still included in the repository to satisfy the containerization requirement.
+> **Note:** Docker Hub connectivity was blocked on the local network during development and testing, so the final cloud deployment was demonstrated using a secure EC2 bootstrap approach via `user_data`. Docker artifacts are still included in the repository to satisfy the containerization requirement.
 
 ### 2. Infrastructure as Code (Terraform)
 - Provisioned AWS infrastructure using Terraform
@@ -345,11 +349,6 @@ http://13.62.227.255:3000/
 
 ---
 
-## Video Demonstration
-
-### Video Link
-**Video Recording (5–10 minutes):**  
-[Watch the demo video](YOUR_VIDEO_LINK)
 
 ### Video Includes
 - Repository overview
@@ -415,7 +414,7 @@ terraform apply -replace="aws_instance.web_server"
 
 ---
 
-## Key Learning / DevSecOps Observations
+## Key Learning / DevOps Observations
 
 ### 1. Shift-Left Security
 Security issues were detected **before deployment** using Trivy integrated into the CI pipeline.
@@ -441,32 +440,10 @@ This ensures that bootstrap script changes trigger safe instance replacement.
 
 ---
 
-## Evaluation Criteria Alignment
-
-### Pipeline Automation
-✔ Jenkins successfully pulls code from GitHub  
-✔ Jenkins runs Trivy security scans  
-✔ Jenkins runs Terraform init / validate / plan on secure version  
-
-### Security Awareness
-✔ Intentional vulnerability was introduced  
-✔ Trivy detected multiple security issues  
-✔ Infrastructure was hardened and re-scanned successfully  
-
-### AI Utilization
-✔ GenAI was used to analyze the Trivy report  
-✔ Risks were summarized  
-✔ Terraform was rewritten based on AI-guided remediation  
-
-### Cloud Deployment
-✔ Final application is accessible on the cloud public IP  
-
----
-
 ## GitHub Repository Link
 [Repository Link](https://github.com/Manthan-23/devops-vartis-lenden)
 
 ---
 
 ## Final Note
-This project demonstrates a practical **DevSecOps workflow** where insecure infrastructure is detected early, analyzed with AI assistance, remediated securely, and deployed to AWS in a production-aware manner.
+This project demonstrates a practical **DevOps workflow** where insecure infrastructure is detected early, analyzed with AI assistance, remediated securely, and deployed to AWS in a production-aware manner.
