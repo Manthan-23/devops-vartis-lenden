@@ -126,7 +126,8 @@ GitHub Repository
   - `Dockerfile`
   - `docker-compose.yml`
 
-> **Note:** Docker Hub connectivity was blocked on the local network during development and testing, so the final cloud deployment was demonstrated using a secure EC2 bootstrap approach via `user_data`. Docker artifacts are still included in the repository to satisfy the containerization requirement.
+> **Note:** During local development, Docker Hub image pulls were blocked due to environment/network connectivity restrictions, which prevented reliable local Docker-based execution. To ensure timely completion of the assignment, I used a secure EC2 bootstrap approach via Terraform `user_data` for the final cloud deployment and ran Jenkins locally without Docker. The repository still includes the required Docker artifacts (`Dockerfile`, `docker-compose.yml`, and application source code), and the core DevOps workflow requirements—pipeline automation, security scanning, AI-assisted remediation, and cloud deployment were fully completed and demonstrated.
+
 
 ### 2. Infrastructure as Code (Terraform)
 - Provisioned AWS infrastructure using Terraform
@@ -165,6 +166,78 @@ This version intentionally included:
 ### 6. Cloud Deployment
 - Final secure Terraform was deployed to AWS
 - Application is accessible on the cloud public IP
+
+---
+
+## GenAI Usage Report (Mandatory)
+
+### Exact AI Prompt Used
+
+```text
+I ran a Trivy misconfiguration scan on my Terraform infrastructure for an AWS EC2 deployment.
+
+Here is the Trivy report:
+
+[pasted Trivy output]
+
+Please do the following:
+1. Summarize each security issue in simple DevOps terms.
+2. Explain the risks of each issue.
+3. Rewrite the Terraform code to remediate all findings.
+4. Ensure the infrastructure remains functional for hosting a web application on port 3000.
+5. Keep the code production-aware and security-focused.
+```
+
+---
+
+### AI Summary of Identified Risks
+
+The AI identified the following security risks:
+
+1. **Public SSH Exposure**
+   - Port 22 was open to `0.0.0.0/0`
+   - This allowed unrestricted internet access to the server’s management interface
+
+2. **Unrestricted Egress**
+   - The security group allowed unrestricted outbound traffic
+   - This increased the risk of data exfiltration and malicious outbound communication if the host was compromised
+
+3. **IMDSv2 Not Enforced**
+   - The EC2 instance did not require metadata tokens
+   - This increased exposure to metadata service abuse / credential theft risks
+
+4. **Unencrypted Root Volume**
+   - The EC2 root disk was not explicitly encrypted
+   - This weakened data-at-rest protection
+
+5. **Poor Rule Auditability**
+   - Security group rules lacked proper descriptions in the initial version
+
+---
+
+### AI-Recommended Remediation Actions
+
+The AI recommended:
+
+- Removing public SSH access entirely
+- Keeping only application port **3000** publicly accessible
+- Enforcing **IMDSv2**
+- Enabling **root block device encryption**
+- Using secure bootstrap automation via **EC2 user data**
+- Hardening the Terraform configuration while preserving application availability
+
+---
+
+### How AI Improved Security
+
+The final secure Terraform version improved the infrastructure by:
+
+- Eliminating public administrative access
+- Reducing exposed attack surface
+- Enforcing modern EC2 metadata security controls
+- Protecting data at rest
+- Preserving application access on port **3000**
+- Enabling a **secure-by-default** deployment model
 
 ---
 
@@ -239,78 +312,6 @@ Misconfigurations = 0
 - Enabled **root volume encryption**
 - Added security-focused instance configuration
 - Preserved public access only for the application on **port 3000**
-
----
-
-## GenAI Usage Report (Mandatory)
-
-### Exact AI Prompt Used
-
-```text
-I ran a Trivy misconfiguration scan on my Terraform infrastructure for an AWS EC2 deployment.
-
-Here is the Trivy report:
-
-[pasted Trivy output]
-
-Please do the following:
-1. Summarize each security issue in simple DevOps terms.
-2. Explain the risks of each issue.
-3. Rewrite the Terraform code to remediate all findings.
-4. Ensure the infrastructure remains functional for hosting a web application on port 3000.
-5. Keep the code production-aware and security-focused.
-```
-
----
-
-### AI Summary of Identified Risks
-
-The AI identified the following security risks:
-
-1. **Public SSH Exposure**
-   - Port 22 was open to `0.0.0.0/0`
-   - This allowed unrestricted internet access to the server’s management interface
-
-2. **Unrestricted Egress**
-   - The security group allowed unrestricted outbound traffic
-   - This increased the risk of data exfiltration and malicious outbound communication if the host was compromised
-
-3. **IMDSv2 Not Enforced**
-   - The EC2 instance did not require metadata tokens
-   - This increased exposure to metadata service abuse / credential theft risks
-
-4. **Unencrypted Root Volume**
-   - The EC2 root disk was not explicitly encrypted
-   - This weakened data-at-rest protection
-
-5. **Poor Rule Auditability**
-   - Security group rules lacked proper descriptions in the initial version
-
----
-
-### AI-Recommended Remediation Actions
-
-The AI recommended:
-
-- Removing public SSH access entirely
-- Keeping only application port **3000** publicly accessible
-- Enforcing **IMDSv2**
-- Enabling **root block device encryption**
-- Using secure bootstrap automation via **EC2 user data**
-- Hardening the Terraform configuration while preserving application availability
-
----
-
-### How AI Improved Security
-
-The final secure Terraform version improved the infrastructure by:
-
-- Eliminating public administrative access
-- Reducing exposed attack surface
-- Enforcing modern EC2 metadata security controls
-- Protecting data at rest
-- Preserving application access on port **3000**
-- Enabling a **secure-by-default** deployment model
 
 ---
 
