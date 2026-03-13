@@ -13,7 +13,6 @@ resource "aws_security_group" "web_sg" {
   name        = "devsecops-web-sg"
   description = "Security group for DevSecOps assignment"
 
-  # Keep only the web app port publicly accessible
   ingress {
     description = "Allow public access to web application on port 3000"
     from_port   = 3000
@@ -28,20 +27,39 @@ resource "aws_security_group" "web_sg" {
 }
 
 resource "aws_instance" "web_server" {
-  ami                    = data.aws_ami.amazon_linux.id
-  instance_type          = var.instance_type
-  key_name               = var.key_name
-  vpc_security_group_ids = [aws_security_group.web_sg.id]
+  ami                         = data.aws_ami.amazon_linux.id
+  instance_type               = var.instance_type
+  key_name                    = var.key_name
+  vpc_security_group_ids      = [aws_security_group.web_sg.id]
+  user_data_replace_on_change = true
 
-  # Enforce IMDSv2
   metadata_options {
     http_tokens = "required"
   }
 
-  # Encrypt the root volume
   root_block_device {
     encrypted = true
   }
+
+  user_data = <<-EOF
+              #!/bin/bash
+              yum update -y
+              yum install -y python3
+
+              mkdir -p /home/ec2-user/app
+              cat <<HTML > /home/ec2-user/app/index.html
+              <html>
+                <head><title>DevOps Assignment-Vartis Platform</title></head>
+                <body style="font-family: Arial; text-align: center; margin-top: 50px;">
+                  <h1>DevOps Assignment(Vartis Platform) - App Running</h1>
+                  <p>Deployed securely on AWS EC2 via Terraform by Manthan Nanaware</p>
+                </body>
+              </html>
+HTML
+
+              cd /home/ec2-user/app
+              nohup python3 -m http.server 3000 --bind 0.0.0.0 > /var/log/app.log 2>&1 &
+              EOF
 
   tags = {
     Name = "devsecops-assignment-server"
