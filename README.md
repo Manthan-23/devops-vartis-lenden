@@ -340,10 +340,8 @@ The final secure Terraform configuration was applied to AWS and successfully pro
 The application is accessible on the EC2 public IP:
 
 ```text
-http://YOUR_PUBLIC_IP:3000
+http://13.62.227.255:3000/
 ```
-
-> Replace `YOUR_PUBLIC_IP` with the final public IP from `terraform output instance_public_ip`
 
 ---
 
@@ -369,50 +367,27 @@ http://YOUR_PUBLIC_IP:3000
 ## Required Screenshots
 
 ### 1. Jenkins Pipeline Success
-> Insert screenshot of the **successful Jenkins build** for the final secure Terraform version.
-
-**Suggested filename:**  
-`images/jenkins-pipeline-success.png`
+![Jenkins Pipeline Success](images/jenkins-pipeline-success.png)
 
 ---
 
 ### 2. Security Vulnerability Report
-> Insert screenshot of the **failed Jenkins build / Trivy findings** from the insecure Terraform version.
-
-**Suggested filename:**  
-`images/security-vulnerability-report.png`
+![Security Vulnerability Report-1](images/security-vulnerability-img1.png)
+![Security Vulnerability Report-2](images/security-vulnerability-img2.png)
+![Security Vulnerability Report-3](images/security-vulnerability-img3.png)
 
 ---
 
 ### 3. Application Running on Cloud Public IP
-> Insert screenshot of the browser showing:
-- the application page
-- the **public IP in the URL bar**
-
-**Suggested filename:**  
-`images/app-running-public-ip.png`
+![Application Running on Public IP](images/app-running-public-ip.png)
 
 ---
 
-## Optional Additional Screenshots (Recommended)
-
-### 4. Final Clean Trivy Scan
-> Screenshot showing:
-
-```text
-Misconfigurations = 0
-```
-
-**Suggested filename:**  
-`images/final-clean-trivy-scan.png`
-
----
-
-### 5. Terraform Plan in Jenkins (Secure Build)
-> Screenshot of Terraform plan output inside the successful Jenkins console.
-
-**Suggested filename:**  
-`images/terraform-plan-success.png`
+### 4. Jenkins and Trivy successful scan
+![Success scan-1](images/final-jenkins-trivy-scan-img1.png)
+![Success scan-2](images/final-jenkins-trivy-scan-img2.png)
+![Success scan-3](images/final-jenkins-trivy-scan-img3.png)
+![Success scan-4](images/final-jenkins-trivy-scan-img4.png)
 
 ---
 
@@ -489,7 +464,7 @@ This ensures that bootstrap script changes trigger safe instance replacement.
 ---
 
 ## GitHub Repository Link
-[Repository Link](YOUR_GITHUB_REPO_LINK)
+[Repository Link](https://github.com/Manthan-23/devops-vartis-lenden)
 
 ---
 
