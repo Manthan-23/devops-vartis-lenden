@@ -1,9 +1,11 @@
-# DevSecOps Assignment – GET 2026  
+# DevOps Assignment – GET 2026  
 **Vartis Platform (LenDenClub) – DevOps Engineer Assignment**
 
 ## Video Link
 **Video Recording (5–10 minutes):**  
 [Watch the demo video](https://drive.google.com/file/d/17fSz2PakT6STb6waMBTdhYxLxiiZrvSh/view?usp=sharing) 
+
+> **Cleanup Note:** After completing the demonstration, the AWS resources provisioned for this assignment were destroyed using `terraform destroy` to avoid unnecessary cloud costs.
 
 ## Project Overview
 This project demonstrates a complete **DevSecOps workflow** for securely provisioning and validating cloud infrastructure before deployment.
